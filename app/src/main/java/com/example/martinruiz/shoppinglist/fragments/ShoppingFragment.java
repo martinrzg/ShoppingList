@@ -23,14 +23,17 @@ import com.example.martinruiz.shoppinglist.R;
 import com.example.martinruiz.shoppinglist.adapters.ItemShopAdapter;
 import com.example.martinruiz.shoppinglist.models.Item;
 import com.example.martinruiz.shoppinglist.models.ShopItem;
+import com.example.martinruiz.shoppinglist.models.ShoppingCart;
 import com.example.martinruiz.shoppinglist.models.Store;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 
@@ -198,9 +201,13 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 
     }
 
-    private void saveItem (Item item){
+    private void saveShoppingCart (ArrayList<ShopItem> shopItems){
+        //OtherObject.setList(new RealmList<YouModel>(list.toArray(new YouModel[list.size()])));
+
         realm.executeTransaction(realm -> {
-            realm.copyToRealm(item);
+            ShoppingCart shoppingCart = new ShoppingCart(new Date(), subtotal );
+            shoppingCart.setItems(new RealmList<ShopItem>(shopItems.toArray(new ShopItem[shopItems.size()])));
+            realm.copyToRealm(shoppingCart);
         });
     }
 

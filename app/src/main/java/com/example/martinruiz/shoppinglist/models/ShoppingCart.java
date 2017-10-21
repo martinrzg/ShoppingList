@@ -24,10 +24,9 @@ public class ShoppingCart extends RealmObject {
 
     }
 
-    public ShoppingCart(int id, Date date, RealmList<ShopItem> items, double total) {
+    public ShoppingCart(Date date, double total) {
         this.id = MyApplication.ShoppingID.incrementAndGet();
         this.date = date;
-        this.items = items;
         this.total = total;
     }
 
