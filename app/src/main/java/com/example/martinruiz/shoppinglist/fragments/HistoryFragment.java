@@ -1,6 +1,7 @@
 package com.example.martinruiz.shoppinglist.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.martinruiz.shoppinglist.R;
+import com.example.martinruiz.shoppinglist.activities.HistoryDetailActivity;
 import com.example.martinruiz.shoppinglist.adapters.HistoryAdapter;
 import com.example.martinruiz.shoppinglist.models.Item;
 import com.example.martinruiz.shoppinglist.models.ShoppingCart;
@@ -95,7 +97,14 @@ public class HistoryFragment extends Fragment {
         //ButterKnife binding here...
         ButterKnife.bind(this,view);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new HistoryAdapter(shoppingCarts, R.layout.item_history,getActivity());
+        adapter = new HistoryAdapter(shoppingCarts, R.layout.item_history, getActivity(), new HistoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(ShoppingCart shoppingCart, int position, View view) {
+                Intent intentDetails = new Intent(getActivity(), HistoryDetailActivity.class);
+                intentDetails.putExtra("id",shoppingCart.getId());
+                startActivity(intentDetails);
+            }
+        });
         recyclerViewHistory.setHasFixedSize(true);
         recyclerViewHistory.setItemAnimator(new DefaultItemAnimator());
         recyclerViewHistory.setLayoutManager(layoutManager);

@@ -1,26 +1,22 @@
 package com.example.martinruiz.shoppinglist.adapters;
 
 import android.app.Activity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.martinruiz.shoppinglist.R;
-import com.example.martinruiz.shoppinglist.models.ShopItem;
 import com.example.martinruiz.shoppinglist.models.ShoppingCart;
-import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by MartinRuiz on 10/11/2017.
@@ -32,11 +28,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     private List<ShoppingCart> shoppingCarts;
     private int layoutReference;
     private Activity activity;
+    private OnItemClickListener onItemClickListener;
 
-    public HistoryAdapter(List<ShoppingCart> items, int layoutRefence, Activity activity) {
+
+    public HistoryAdapter(List<ShoppingCart> items, int layoutRefence, Activity activity, OnItemClickListener onItemClickListener) {
         this.shoppingCarts = items;
         this.layoutReference = layoutRefence;
         this.activity = activity;
+        this.onItemClickListener = onItemClickListener;
     }
 
 
@@ -50,7 +49,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(HistoryAdapter.ViewHolder holder, int position) {
-        holder.bind(shoppingCarts.get(position));
+        holder.bind(shoppingCarts.get(position), onItemClickListener);
     }
 
     @Override
@@ -62,13 +61,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         @BindView(R.id.textViewShoppingDate) TextView textViewShoppingDate;
         @BindView(R.id.textViewShoppingElements) TextView textViewShoppingElements;
         @BindView(R.id.textViewShoppingTotal) TextView textViewShoppingTotal;
+        @BindView(R.id.cardViewHistory) CardView cardViewHistory;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
 
-        public void bind(final ShoppingCart shoppingCart ){
+        public void bind(final ShoppingCart shoppingCart , final OnItemClickListener onItemClickListener ){
             DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             textViewShoppingDate.setText("Compra "+sdf.format(shoppingCart.getDate()));
             textViewShoppingTotal.setText("$"+String.format("%.2f",shoppingCart.getTotal()));
@@ -77,8 +77,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 elements += shoppingCart.getItems().get(i).getQuantity();
             }
             textViewShoppingElements.setText(elements+" elementos");
-
+            cardViewHistory.setOnClickListener(view -> {
+                onItemClickListener.onItemClick(shoppingCart ,getAdapterPosition(),cardViewHistory);
+            });
         }
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(ShoppingCart shoppingCart, int position, View view);
+    }
 }
+
+
