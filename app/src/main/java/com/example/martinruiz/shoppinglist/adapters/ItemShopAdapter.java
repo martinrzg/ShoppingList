@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.martinruiz.shoppinglist.R;
 import com.example.martinruiz.shoppinglist.models.Item;
+import com.example.martinruiz.shoppinglist.models.ShopItem;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -27,11 +28,11 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class ItemShopAdapter extends RecyclerView.Adapter<ItemShopAdapter.ViewHolder> {
 
 
-    private List<Item> items;
+    private List<ShopItem> items;
     private int layoutReference;
     private Activity activity;
 
-    public ItemShopAdapter(List<Item> items, int layoutRefence, Activity activity) {
+    public ItemShopAdapter(List<ShopItem> items, int layoutRefence, Activity activity) {
         this.items = items;
         this.layoutReference = layoutRefence;
         this.activity = activity;
@@ -66,7 +67,7 @@ public class ItemShopAdapter extends RecyclerView.Adapter<ItemShopAdapter.ViewHo
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
-        public void bind(final Item item ){
+        public void bind(final ShopItem item ){
             textViewItemName.setText(item.getName());
             textViewItemCategory.setText(item.getQuantity() + " of "+item.getPrice());
 

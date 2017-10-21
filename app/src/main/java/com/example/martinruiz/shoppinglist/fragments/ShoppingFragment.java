@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.martinruiz.shoppinglist.R;
 import com.example.martinruiz.shoppinglist.adapters.ItemShopAdapter;
 import com.example.martinruiz.shoppinglist.models.Item;
+import com.example.martinruiz.shoppinglist.models.ShopItem;
 import com.example.martinruiz.shoppinglist.models.Store;
 
 import java.util.ArrayList;
@@ -58,11 +59,12 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
     @BindView(R.id.imageViewAddItem) ImageView imageViewAddItem;
     @BindView(R.id.editTextShoppingQuantity) EditText editTextQuantity;
 
-    private ArrayList<Item> shoppingItems ;
+    private ArrayList<ShopItem> shoppingItems ;
     private RealmResults<Item> items;
     private ArrayAdapter<Item> adapterItem;
     private Item selectedItem;
     private double subtotal;
+    private int elements;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -137,17 +139,21 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
         if(editTextQuantity.getText().toString().isEmpty()){
             editTextQuantity.setError("Valid quantity");
         }else {
-            try{
                 quantity = Integer.parseInt(editTextQuantity.getText().toString());
                 editTextQuantity.setError(null);
                 System.out.println(quantity+10);
-                selectedItem.setQuantity(quantity);
-                subtotal += selectedItem.getPrice();
-                shoppingItems.add(selectedItem);
+
+                ShopItem shopedItem = new ShopItem(selectedItem.getName(), selectedItem.getCategory()
+                        ,selectedItem.getPrice(), selectedItem.getImageURL(), quantity,
+                        selectedItem.getNote());
+
+                subtotal += selectedItem.getPrice()*quantity;
+                elements += quantity;
+
+                textViewItemElements.setText(""+elements);
+                shoppingItems.add(shopedItem);
                 textViewItemSubtotal.setText("$"+subtotal);
-            }catch (Exception e){
-                editTextQuantity.setError("Valid number");
-            }
+                adapter.notifyDataSetChanged();
         }
     }
     @OnClick(R.id.fabSaveShoppingCart)
@@ -190,6 +196,12 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    private void saveItem (Item item){
+        realm.executeTransaction(realm -> {
+            realm.copyToRealm(item);
+        });
     }
 
     /**

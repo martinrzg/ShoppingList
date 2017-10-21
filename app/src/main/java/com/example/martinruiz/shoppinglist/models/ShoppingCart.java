@@ -17,14 +17,14 @@ public class ShoppingCart extends RealmObject {
     @PrimaryKey
     private int id;
     private Date date;
-    private RealmList<Item> items;
+    private RealmList<ShopItem> items;
     private double total;
 
     public ShoppingCart() {
 
     }
 
-    public ShoppingCart(int id, Date date, RealmList<Item> items, double total) {
+    public ShoppingCart(int id, Date date, RealmList<ShopItem> items, double total) {
         this.id = MyApplication.ShoppingID.incrementAndGet();
         this.date = date;
         this.items = items;
@@ -43,11 +43,11 @@ public class ShoppingCart extends RealmObject {
         this.date = date;
     }
 
-    public RealmList<Item> getItems() {
+    public RealmList<ShopItem> getItems() {
         return items;
     }
 
-    public void setItems(RealmList<Item> items) {
+    public void setItems(RealmList<ShopItem> items) {
         this.items = items;
     }
 

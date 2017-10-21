@@ -21,7 +21,6 @@
                 android:gravity="center_horizontal"
                 android:textColor="#FFFFFF"
                 android:textSize="40sp"
-                android:text="$1050.00"
                 android:paddingBottom="16dp"
                 />
             <TextView
@@ -31,7 +30,6 @@
                 android:textColor="#beffffff"
                 android:gravity="center_horizontal"
                 android:textSize="30sp"
-                android:text="2 elements"
                 />
         </LinearLayout>
         <LinearLayout

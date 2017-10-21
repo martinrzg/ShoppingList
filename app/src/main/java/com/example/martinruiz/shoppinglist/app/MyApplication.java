@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.martinruiz.shoppinglist.models.Category;
 import com.example.martinruiz.shoppinglist.models.Item;
 import com.example.martinruiz.shoppinglist.models.List;
+import com.example.martinruiz.shoppinglist.models.ShopItem;
 import com.example.martinruiz.shoppinglist.models.ShoppingCart;
 import com.example.martinruiz.shoppinglist.models.Store;
 
@@ -25,6 +26,7 @@ public class MyApplication extends Application {
     public static AtomicInteger CategoryID = new AtomicInteger();
     public static AtomicInteger StoreID = new AtomicInteger();
     public static AtomicInteger ShoppingID = new AtomicInteger();
+    public static AtomicInteger ShopItemID = new AtomicInteger();
 
     @Override
     public void onCreate() {
@@ -36,6 +38,7 @@ public class MyApplication extends Application {
         CategoryID = getIdByTable(realm, Category.class);
         StoreID = getIdByTable(realm, Store.class);
         ShoppingID = getIdByTable(realm, ShoppingCart.class);
+        ShopItemID = getIdByTable(realm, ShopItem.class);
 
         realm.close();
 
