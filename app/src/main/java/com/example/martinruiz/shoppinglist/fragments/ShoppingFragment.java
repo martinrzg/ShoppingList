@@ -162,6 +162,13 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
     @OnClick(R.id.fabSaveShoppingCart)
     public void fabSaveShoppingCart(){
         saveShoppingCart(shoppingItems);
+        shoppingItems.removeAll(shoppingItems);
+        elements = 0;
+        subtotal = 0;
+        adapter.notifyDataSetChanged();
+        textViewItemElements.setText("Purchase Complete");
+        textViewItemSubtotal.setText("Thanks!");
+        Toast.makeText(getContext(), "Successful Purchase", Toast.LENGTH_LONG).show();
     }
 
 
@@ -203,7 +210,6 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
 
     private void saveShoppingCart (ArrayList<ShopItem> shopItems){
         //OtherObject.setList(new RealmList<YouModel>(list.toArray(new YouModel[list.size()])));
-
         realm.executeTransaction(realm -> {
             ShoppingCart shoppingCart = new ShoppingCart(new Date(), subtotal );
             shoppingCart.setItems(new RealmList<ShopItem>(shopItems.toArray(new ShopItem[shopItems.size()])));

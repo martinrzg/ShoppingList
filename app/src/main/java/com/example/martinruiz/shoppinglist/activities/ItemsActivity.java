@@ -30,6 +30,7 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmList;
+import io.realm.RealmModel;
 import io.realm.RealmResults;
 
 public class ItemsActivity extends AppCompatActivity implements RealmChangeListener<RealmResults<Item>> {
@@ -93,7 +94,12 @@ public class ItemsActivity extends AppCompatActivity implements RealmChangeListe
 
         //list = realm.where(List.class).equalTo("id", listID).findFirst();
         //CHECK LATER
-        //list.addChangeListener(this);
+        list.addChangeListener(new RealmChangeListener<RealmModel>() {
+            @Override
+            public void onChange(RealmModel realmModel) {
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         //items = list.getItems();
     }

@@ -69,7 +69,7 @@ public class ItemShopAdapter extends RecyclerView.Adapter<ItemShopAdapter.ViewHo
         }
         public void bind(final ShopItem item ){
             textViewItemName.setText(item.getName());
-            textViewItemCategory.setText(item.getQuantity() + " of "+item.getPrice());
+            textViewItemCategory.setText(item.getQuantity() + " items of $"+item.getPrice());
 
             textViewItemPrice.setText("$"+String.format("%.2f",(item.getPrice() * item.getQuantity())));
             if(item.getImageURL()==null || item.getImageURL().isEmpty()){

@@ -129,7 +129,7 @@ public class HistoryFragment extends Fragment {
             /*throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
             */
-            Toast.makeText(context,"History Fragment Attached",Toast.LENGTH_LONG).show();
+            //.makeText(context,"History Fragment Attached",Toast.LENGTH_LONG).show();
 
         }
     }

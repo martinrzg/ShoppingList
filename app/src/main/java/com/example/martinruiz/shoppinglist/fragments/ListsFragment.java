@@ -169,7 +169,7 @@ public class ListsFragment extends Fragment implements RealmChangeListener<Realm
             /*throw new RuntimeException(context.toString()
                     + " must implement OnFragmentIntera  ctionListener");
             */
-            Toast.makeText(context,"Lists Fragment Attached",Toast.LENGTH_LONG).show();
+            //Toast.makeText(context,"Lists Fragment Attached",Toast.LENGTH_LONG).show();
 
         }
     }
