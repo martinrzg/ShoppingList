@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.martinruiz.shoppinglist.activities.EditAddItemActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="250dp  "
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
+            <ImageView
+                android:id="@+id/imageViewItemPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_edit_add_item" />
++
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabSaveItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_save_white_24px"
+        app:fab_size="normal"
+
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end"/>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/famChoosePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:menu_colorNormal="@color/colorPrimaryDark"
+        app:menu_icon="@drawable/ic_add_a_photo_white_24px"
+        >
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabCameraPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Take a photo"
+            android:src="@drawable/ic_photo_camera_white_24px"
+            />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabGalleryPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Choose a photo"
+            android:src="@drawable/ic_photo_library_white_24px"
+            />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+</android.support.design.widget.CoordinatorLayout>

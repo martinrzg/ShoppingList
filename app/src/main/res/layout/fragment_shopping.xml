@@ -1,0 +1,79 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.martinruiz.shoppinglist.fragments.ShoppingFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/textViewItemSubtotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="#FFFFFF"
+                android:textSize="40sp"
+                android:text="$1050.00"
+                android:paddingBottom="16dp"
+                />
+            <TextView
+                android:id="@+id/textViewItemElements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#beffffff"
+                android:gravity="center_horizontal"
+                android:textSize="30sp"
+                android:text="2 elements"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+            <Spinner
+                android:id="@+id/spinnerItems"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <EditText
+                android:id="@+id/editTextShoppingQuantity"
+                android:text="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_weight=".25"/>
+            <ImageView
+                android:id="@+id/imageViewAddItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_add_black_24px"
+                />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewShoppingItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabSaveShoppingCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|end"
+        app:fab_size="normal"
+        android:src="@drawable/ic_save_white_24px"/>
+
+</FrameLayout>
