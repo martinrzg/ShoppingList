@@ -4,14 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.martinruiz.shoppinglist.R;
+import com.example.martinruiz.shoppinglist.adapters.HistoryAdapter;
+import com.example.martinruiz.shoppinglist.models.Item;
+import com.example.martinruiz.shoppinglist.models.ShoppingCart;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 
 
 /**
@@ -31,6 +41,14 @@ public class HistoryFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    @BindView(R.id.recyclerViewHistory) RecyclerView recyclerViewHistory;
+
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    private RealmResults<ShoppingCart> shoppingCarts;
+    private Realm realm;
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,6 +81,10 @@ public class HistoryFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        realm = Realm.getDefaultInstance();
+        shoppingCarts = realm.where(ShoppingCart.class).findAll();
+
     }
 
     @Override
@@ -72,6 +94,13 @@ public class HistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         //ButterKnife binding here...
         ButterKnife.bind(this,view);
+        layoutManager = new LinearLayoutManager(getContext());
+        adapter = new HistoryAdapter(shoppingCarts, R.layout.item_history,getActivity());
+        recyclerViewHistory.setHasFixedSize(true);
+        recyclerViewHistory.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewHistory.setLayoutManager(layoutManager);
+        recyclerViewHistory.setAdapter(adapter);
+
         return view;
     }
 

@@ -161,7 +161,7 @@ public class ShoppingFragment extends Fragment implements AdapterView.OnItemSele
     }
     @OnClick(R.id.fabSaveShoppingCart)
     public void fabSaveShoppingCart(){
-
+        saveShoppingCart(shoppingItems);
     }
 
 
